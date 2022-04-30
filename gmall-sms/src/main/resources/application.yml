@@ -1,0 +1,36 @@
+server:
+  port: 18082
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 82.157.174.16:8848
+    sentinel:
+      transport:
+        dashboard: 82.157.174.16:8080
+        port: 8719
+  zipkin:
+    base-url: http://82.157.174.16:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://82.157.174.16:3306/guli_sms
+    username: root
+    password: root
+feign:
+  sentinel:
+    enabled: true
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.hsqyz.gmall.sms.entity
+  global-config:
+    db-config:
+      id-type: auto
