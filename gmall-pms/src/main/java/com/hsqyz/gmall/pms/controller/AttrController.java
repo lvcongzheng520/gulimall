@@ -1,5 +1,6 @@
 package com.hsqyz.gmall.pms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hsqyz.gmall.common.bean.PageParamVo;
 import com.hsqyz.gmall.common.bean.PageResultVo;
 import com.hsqyz.gmall.common.bean.ResponseVo;
@@ -26,6 +27,27 @@ public class AttrController {
 
     @Autowired
     private AttrService attrService;
+
+    @GetMapping("category/{cid}")
+    public ResponseVo<List<AttrEntity>> queryAttrsByCidOrTypeOrSearchType(
+        @PathVariable("cid") Long cid,
+        @RequestParam(value = "type",required = false) Integer type,
+        @RequestParam(value = "searchType",required = false) Integer searchType
+    ){
+        List<AttrEntity> attrEntities = this.attrService.queryAttrsByCidOrTypeOrSearchType(cid,type,searchType);
+        return ResponseVo.ok(attrEntities);
+    }
+
+    /**
+     * 根据分组ID查询查询属性
+     * @param gid
+     * @return
+     */
+    @GetMapping("group/{gid}")
+    public ResponseVo<List<AttrEntity>> queryAttrsByGid(@PathVariable("gid") Long gid){
+        List<AttrEntity> attrEntities = this.attrService.list(new QueryWrapper<AttrEntity>().eq("group_id", gid));
+        return ResponseVo.ok(attrEntities);
+    }
 
     /**
      * 列表

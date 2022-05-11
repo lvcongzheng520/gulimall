@@ -5,6 +5,8 @@ import com.hsqyz.gmall.common.bean.PageResultVo;
 import com.hsqyz.gmall.common.bean.PageParamVo;
 import com.hsqyz.gmall.pms.entity.AttrGroupEntity;
 
+import java.util.List;
+
 /**
  * 属性分组
  *
@@ -15,5 +17,7 @@ import com.hsqyz.gmall.pms.entity.AttrGroupEntity;
 public interface AttrGroupService extends IService<AttrGroupEntity> {
 
     PageResultVo queryPage(PageParamVo paramVo);
+
+    List<AttrGroupEntity> queryGroupWithAttrsByCid(Long cid);
 }
 

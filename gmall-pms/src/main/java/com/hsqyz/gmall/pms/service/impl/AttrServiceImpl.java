@@ -11,6 +11,8 @@ import com.hsqyz.gmall.pms.mapper.AttrMapper;
 import com.hsqyz.gmall.pms.entity.AttrEntity;
 import com.hsqyz.gmall.pms.service.AttrService;
 
+import java.util.List;
+
 
 @Service("attrService")
 public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> implements AttrService {
@@ -23,6 +25,21 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
         );
 
         return new PageResultVo(page);
+    }
+
+    @Override
+    public List<AttrEntity> queryAttrsByCidOrTypeOrSearchType(Long cid, Integer type, Integer searchType) {
+        QueryWrapper<AttrEntity> wrapper = new QueryWrapper<>();
+        wrapper.eq("category_id", cid);
+
+        if (type != null) {
+            wrapper.eq("type", type);
+        }
+        if (searchType != null) {
+            wrapper.eq("search_type", searchType);
+        }
+
+        return this.list(wrapper);
     }
 
 }

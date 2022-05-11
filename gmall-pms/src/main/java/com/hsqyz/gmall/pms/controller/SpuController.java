@@ -1,5 +1,6 @@
 package com.hsqyz.gmall.pms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hsqyz.gmall.common.bean.PageParamVo;
 import com.hsqyz.gmall.common.bean.PageResultVo;
 import com.hsqyz.gmall.common.bean.ResponseVo;
@@ -26,6 +27,12 @@ public class SpuController {
 
     @Autowired
     private SpuService spuService;
+
+    @GetMapping("category/{categoryId}")
+    public ResponseVo<PageResultVo> querySpuByCidAndPage(@PathVariable("categoryId") Long cid,PageParamVo paramVo){
+        PageResultVo resultVo = this.spuService.querySpuByCidAndPage(cid,paramVo);
+        return ResponseVo.ok(resultVo);
+    }
 
     /**
      * 列表

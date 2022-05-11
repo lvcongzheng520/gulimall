@@ -11,6 +11,8 @@ import com.hsqyz.gmall.pms.mapper.CategoryMapper;
 import com.hsqyz.gmall.pms.entity.CategoryEntity;
 import com.hsqyz.gmall.pms.service.CategoryService;
 
+import java.util.List;
+
 
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEntity> implements CategoryService {
@@ -23,6 +25,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
         );
 
         return new PageResultVo(page);
+    }
+
+    @Override
+    public List<CategoryEntity> queryCategoryById(Long parentId) {
+        QueryWrapper<CategoryEntity> wrapper = new QueryWrapper<>();
+        if (parentId!=-1) {
+            wrapper.eq("parent_id",parentId);
+        }
+        return this.list(wrapper);
     }
 
 }

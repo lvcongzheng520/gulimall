@@ -1,5 +1,6 @@
 package com.hsqyz.gmall.pms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hsqyz.gmall.common.bean.PageParamVo;
 import com.hsqyz.gmall.common.bean.PageResultVo;
 import com.hsqyz.gmall.common.bean.ResponseVo;
@@ -26,6 +27,21 @@ public class AttrGroupController {
 
     @Autowired
     private AttrGroupService attrGroupService;
+
+    @GetMapping("withattrs/{catId}")
+    public ResponseVo<List<AttrGroupEntity>> queryGroupWithAttrsByCid(@PathVariable("catId") Long cid){
+        List<AttrGroupEntity> attrGroupEntities = this.attrGroupService.queryGroupWithAttrsByCid(cid);
+        return ResponseVo.ok(attrGroupEntities);
+    }
+
+    /**
+     * 根据分类ID查询属性分组
+     */
+    @GetMapping("category/{cid}")
+    public ResponseVo<List<AttrGroupEntity>> queryGroupBycid(@PathVariable("cid") Long cid){
+        List<AttrGroupEntity> attrGroupEntities = attrGroupService.list(new QueryWrapper<AttrGroupEntity>().eq("category_id",cid));
+        return ResponseVo.ok(attrGroupEntities);
+    }
 
     /**
      * 列表

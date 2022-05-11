@@ -5,6 +5,8 @@ import com.hsqyz.gmall.common.bean.PageResultVo;
 import com.hsqyz.gmall.common.bean.PageParamVo;
 import com.hsqyz.gmall.pms.entity.CategoryEntity;
 
+import java.util.List;
+
 /**
  * 商品三级分类
  *
@@ -15,5 +17,7 @@ import com.hsqyz.gmall.pms.entity.CategoryEntity;
 public interface CategoryService extends IService<CategoryEntity> {
 
     PageResultVo queryPage(PageParamVo paramVo);
+
+    List<CategoryEntity> queryCategoryById(Long parentId);
 }
 
